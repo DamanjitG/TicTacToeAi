@@ -62,41 +62,50 @@ namespace TicTacToeAi
                         gameBoard.DisplayBoard();
                         if (goFirst == 1)
                         {
-                            while (playerWin == false && aiWin == false)
+                            while (true)
                             {
                                 TakePlayerTurn(gameBoard);
                                 Console.WriteLine();
                                 gameBoard.DisplayBoard();
                                 Console.WriteLine();
-                                //Only bother running if both the AI and the player have taken 2 turns, because it is impossible to win until at least your third move anyway
-                                if (gameBoard.CheckWin() == 1)
+                                switch (LookForGameEnd(gameBoard, easyAI))
                                 {
-                                    playerWin = true;
-                                    Console.WriteLine("Player wins!");
+                                    case 3:
+                                        Console.WriteLine("The game is drawn.");
+                                        goto GameEnded;
+
+                                    case 2:
+                                        Console.WriteLine("The AI has won!");
+                                        goto GameEnded;
+
+                                    case 1:
+                                        Console.WriteLine("The player has won!");
+                                        goto GameEnded;
+
+                                    case 0:
+                                        break;
                                 }
-                                else if (gameBoard.CheckWin() == 2)
+                                Console.WriteLine("The AI will now take it's turn.");
+                                easyAI.TakeTurn(gameBoard);
+                                Console.WriteLine();
+                                gameBoard.DisplayBoard();
+                                Console.WriteLine();
+                                switch (LookForGameEnd(gameBoard, easyAI))
                                 {
-                                    aiWin = true;
-                                    Console.WriteLine("AI wins!");
-                                }
-                                if (playerWin == false && aiWin == false)
-                                {
-                                    Console.WriteLine("The AI will now take it's turn.");
-                                    easyAI.TakeTurn(gameBoard);
-                                    Console.WriteLine();
-                                    gameBoard.DisplayBoard();
-                                    Console.WriteLine();
-                                    //round win code
-                                    if (gameBoard.CheckWin() == 1)
-                                    {
-                                        playerWin = true;
-                                        Console.WriteLine("Player wins!");
-                                    }
-                                    else if (gameBoard.CheckWin() == 2)
-                                    {
-                                        aiWin = true;
-                                        Console.WriteLine("AI wins!");
-                                    }
+                                    case 3:
+                                        Console.WriteLine("The game is drawn.");
+                                        goto GameEnded;
+
+                                    case 2:
+                                        Console.WriteLine("The AI has won!");
+                                        goto GameEnded;
+
+                                    case 1:
+                                        Console.WriteLine("The player has won!");
+                                        goto GameEnded;
+
+                                    case 0:
+                                        break;
                                 }
                             }
                         }
@@ -109,38 +118,43 @@ namespace TicTacToeAi
                                 Console.WriteLine();
                                 gameBoard.DisplayBoard();
                                 Console.WriteLine();
-                                //round win code
+                                switch (LookForGameEnd(gameBoard, easyAI))
                                 {
-                                    if (gameBoard.CheckWin() == 1)
-                                    {
-                                        playerWin = true;
-                                        Console.WriteLine("Player wins!");
-                                    }
-                                    else if (gameBoard.CheckWin() == 2)
-                                    {
-                                        aiWin = true;
-                                        Console.WriteLine("AI wins!");
-                                    }
+                                    case 3:
+                                        Console.WriteLine("The game is drawn.");
+                                        goto GameEnded;
+
+                                    case 2:
+                                        Console.WriteLine("The AI has won!");
+                                        goto GameEnded;
+
+                                    case 1:
+                                        Console.WriteLine("The player has won!");
+                                        goto GameEnded;
+
+                                    case 0:
+                                        break;
                                 }
-                                if (aiWin == false && playerWin == false)
+                                TakePlayerTurn(gameBoard);
+                                Console.WriteLine();
+                                gameBoard.DisplayBoard();
+                                Console.WriteLine();
+                                switch (LookForGameEnd(gameBoard, easyAI))
                                 {
-                                    TakePlayerTurn(gameBoard);
-                                    Console.WriteLine();
-                                    gameBoard.DisplayBoard();
-                                    Console.WriteLine();
-                                    //round win code
-                                    {
-                                        if (gameBoard.CheckWin() == 1)
-                                        {
-                                            playerWin = true;
-                                            Console.WriteLine("Player wins!");
-                                        }
-                                        else if (gameBoard.CheckWin() == 2)
-                                        {
-                                            aiWin = true;
-                                            Console.WriteLine("AI wins!");
-                                        }
-                                    }
+                                    case 3:
+                                        Console.WriteLine("The game is drawn.");
+                                        goto GameEnded;
+
+                                    case 2:
+                                        Console.WriteLine("The AI has won!");
+                                        goto GameEnded;
+
+                                    case 1:
+                                        Console.WriteLine("The player has won!");
+                                        goto GameEnded;
+
+                                    case 0:
+                                        break;
                                 }
                             }
                         }
@@ -154,6 +168,7 @@ namespace TicTacToeAi
                         Console.WriteLine("This difficulty level is still under development.");
                         break;
                 }
+                GameEnded:
                 Console.WriteLine();
                 Console.WriteLine("Would you like to play again?");
                 playAgainInput = Console.ReadLine();
@@ -184,6 +199,23 @@ namespace TicTacToeAi
             {
                 gameBoard.SetGridSpace(selectedSpace, 'X');
             }
+        }
+        static int LookForGameEnd (Board gameBoard, EasyAI easyAI)
+        {
+            //0 for no win, 1 for player win, 2 for AI win, 3 for draw
+            if (gameBoard.CheckWin() == 0 && gameBoard.BoardFull() == true)
+            {
+                return 3;
+            }
+            if (gameBoard.CheckWin() == 1)
+            {
+                return 1;
+            }
+            else if (gameBoard.CheckWin() == 2)
+            {
+                return 2;
+            }
+            return 0;
         }
     }
 }

@@ -158,10 +158,12 @@ namespace TicTacToeAi
             //Horizontal wins
             if (grid[0, 0] == grid[0, 1] && grid[0, 0] == grid[0, 2])
             {
-                if (grid[0, 0] == 'X') {
+                if (grid[0, 0] == 'X')
+                {
                     return 1;
                 }
-                else if (grid[0, 0] == 'O') {
+                else if (grid[0, 0] == 'O')
+                {
                     return 2;
                 }
             }
@@ -171,7 +173,7 @@ namespace TicTacToeAi
                 {
                     return 1;
                 }
-                else if (grid[1, 0]== 'O')
+                else if (grid[1, 0] == 'O')
                 {
                     return 2;
                 }
@@ -222,9 +224,9 @@ namespace TicTacToeAi
                 }
             }
             //Diagonal wins
-            if (grid[0,0] == grid[1,1] && grid[0,0] == grid[2,2])
+            if (grid[0, 0] == grid[1, 1] && grid[0, 0] == grid[2, 2])
             {
-                if(grid[0, 0] == 'X')
+                if (grid[0, 0] == 'X')
                 {
                     return 1;
                 }
@@ -247,6 +249,28 @@ namespace TicTacToeAi
 
             //No wins found, code will run to here, return 0 to indicate no win
             return 0;
+        }
+        public bool BoardFull()
+        {
+            int increment=0;
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    if (grid[i, j] == 'X' || grid[i,j] == 'O')
+                    {
+                        increment++;
+                    }
+                }
+            }
+            if (increment == 9)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
