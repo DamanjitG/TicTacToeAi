@@ -15,8 +15,6 @@ namespace TicTacToeAi
                 bool difficultySelect = true;
                 int goFirst;
                 string selectedDifficulty = "";
-                bool playerWin = false;
-                bool aiWin = false;
                 Console.WriteLine("Welcome to Tic Tac Toe.");
                 Console.WriteLine("For this game, you will be represente by X, and the AI represented by O.");
                 gameBoard.DisplayBoard();
@@ -111,7 +109,7 @@ namespace TicTacToeAi
                         }
                         else if (goFirst == 2)
                         {
-                            while (aiWin == false && playerWin == false)
+                            while (true)
                             {
                                 Console.WriteLine("The AI will now take it's turn.");
                                 easyAI.TakeTurn(gameBoard);
