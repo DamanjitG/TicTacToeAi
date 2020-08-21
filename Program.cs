@@ -68,7 +68,7 @@ namespace TicTacToeAi
                                 Console.WriteLine();
                                 gameBoard.DisplayBoard();
                                 Console.WriteLine();
-                                switch (LookForGameEnd(gameBoard, easyAI))
+                                switch (LookForGameEnd(gameBoard))
                                 {
                                     case 3:
                                         Console.WriteLine("The game is drawn.");
@@ -90,7 +90,7 @@ namespace TicTacToeAi
                                 Console.WriteLine();
                                 gameBoard.DisplayBoard();
                                 Console.WriteLine();
-                                switch (LookForGameEnd(gameBoard, easyAI))
+                                switch (LookForGameEnd(gameBoard))
                                 {
                                     case 3:
                                         Console.WriteLine("The game is drawn.");
@@ -118,7 +118,7 @@ namespace TicTacToeAi
                                 Console.WriteLine();
                                 gameBoard.DisplayBoard();
                                 Console.WriteLine();
-                                switch (LookForGameEnd(gameBoard, easyAI))
+                                switch (LookForGameEnd(gameBoard))
                                 {
                                     case 3:
                                         Console.WriteLine("The game is drawn.");
@@ -139,7 +139,7 @@ namespace TicTacToeAi
                                 Console.WriteLine();
                                 gameBoard.DisplayBoard();
                                 Console.WriteLine();
-                                switch (LookForGameEnd(gameBoard, easyAI))
+                                switch (LookForGameEnd(gameBoard))
                                 {
                                     case 3:
                                         Console.WriteLine("The game is drawn.");
@@ -200,7 +200,7 @@ namespace TicTacToeAi
                 gameBoard.SetGridSpace(selectedSpace, 'X');
             }
         }
-        static int LookForGameEnd (Board gameBoard, EasyAI easyAI)
+        static int LookForGameEnd (Board gameBoard)
         {
             //0 for no win, 1 for player win, 2 for AI win, 3 for draw
             if (gameBoard.CheckWin() == 0 && gameBoard.BoardFull() == true)
