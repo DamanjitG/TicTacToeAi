@@ -9,15 +9,22 @@ namespace TicTacToeAi
         public void TakeTurn(Board gameBoard)
         {
             Random rand = new Random();
-            bool targetEmpty = false;
-            bool[] takenSpaces = new bool[9];
-            char targetSpace = 'Z'; //set to Z so it does not correspond to a grid space should something go wrong
-            while (targetEmpty == false)
+            List<int> availableSpaces = new List<int>();
+            int increment = 0;
+            char targetSpaceChar; 
+            for (int i = 0; i<3;i++)
             {
-                targetSpace = Convert.ToChar(rand.Next(64, 73));
-                targetEmpty = gameBoard.IsGridSpaceEmpty(targetSpace);
+                for (int j = 0; j<3; j++)
+                {
+                    increment++;
+                    if (gameBoard.grid[i,j] != 'X' && gameBoard.grid[i, j] != 'O')
+                    {
+                        availableSpaces.Add(increment);
+                    }
+                }
             }
-            gameBoard.SetGridSpace(targetSpace, 'O'); 
+            targetSpaceChar = Convert.ToChar((availableSpaces[rand.Next(1, availableSpaces.Count)] + 64));
+            gameBoard.SetGridSpace(targetSpaceChar, 'O'); 
         }
     }
 }
