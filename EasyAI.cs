@@ -23,8 +23,16 @@ namespace TicTacToeAi
                     }
                 }
             }
-            targetSpaceChar = Convert.ToChar((availableSpaces[rand.Next(1, availableSpaces.Count)] + 64));
-            gameBoard.SetGridSpace(targetSpaceChar, 'O'); 
+            if (availableSpaces.Count != 1)
+            {
+                targetSpaceChar = Convert.ToChar((availableSpaces[rand.Next(1, availableSpaces.Count)] + 64));
+                gameBoard.SetGridSpace(targetSpaceChar, 'O');
+            }
+            else
+            {
+                targetSpaceChar = Convert.ToChar((availableSpaces[0] + 64));
+                gameBoard.SetGridSpace(targetSpaceChar, 'O');
+            }
         }
     }
 }

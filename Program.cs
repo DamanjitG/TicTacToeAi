@@ -4,6 +4,7 @@ namespace TicTacToeAi
 {
     class Program
     {
+        //TODO: REFACTOR ROUND WIN CODE INTO A METHOD
         static void Main(string[] args)
         {
             bool playAgain = true;
@@ -16,7 +17,6 @@ namespace TicTacToeAi
                 string selectedDifficulty = "";
                 bool playerWin = false;
                 bool aiWin = false;
-                int roundCount = 0;
                 Console.WriteLine("Welcome to Tic Tac Toe.");
                 Console.WriteLine("For this game, you will be represente by X, and the AI represented by O.");
                 gameBoard.DisplayBoard();
@@ -52,7 +52,7 @@ namespace TicTacToeAi
                             break;
                     }
                 }
-                Console.WriteLine("Input '1' if you would like to go first, and '0' if you would like the computer to go first.");
+                Console.WriteLine("Input '1' if you would like to go first, and '2' if you would like the computer to go first.");
                 goFirst = Convert.ToInt32(Console.ReadLine());
                 switch (selectedDifficulty)
                 {
@@ -69,7 +69,47 @@ namespace TicTacToeAi
                                 gameBoard.DisplayBoard();
                                 Console.WriteLine();
                                 //Only bother running if both the AI and the player have taken 2 turns, because it is impossible to win until at least your third move anyway
-                                if (roundCount >= 2)
+                                if (gameBoard.CheckWin() == 1)
+                                {
+                                    playerWin = true;
+                                    Console.WriteLine("Player wins!");
+                                }
+                                else if (gameBoard.CheckWin() == 2)
+                                {
+                                    aiWin = true;
+                                    Console.WriteLine("AI wins!");
+                                }
+                                if (playerWin == false && aiWin == false)
+                                {
+                                    Console.WriteLine("The AI will now take it's turn.");
+                                    easyAI.TakeTurn(gameBoard);
+                                    Console.WriteLine();
+                                    gameBoard.DisplayBoard();
+                                    Console.WriteLine();
+                                    //round win code
+                                    if (gameBoard.CheckWin() == 1)
+                                    {
+                                        playerWin = true;
+                                        Console.WriteLine("Player wins!");
+                                    }
+                                    else if (gameBoard.CheckWin() == 2)
+                                    {
+                                        aiWin = true;
+                                        Console.WriteLine("AI wins!");
+                                    }
+                                }
+                            }
+                        }
+                        else if (goFirst == 2)
+                        {
+                            while (aiWin == false && playerWin == false)
+                            {
+                                Console.WriteLine("The AI will now take it's turn.");
+                                easyAI.TakeTurn(gameBoard);
+                                Console.WriteLine();
+                                gameBoard.DisplayBoard();
+                                Console.WriteLine();
+                                //round win code
                                 {
                                     if (gameBoard.CheckWin() == 1)
                                     {
@@ -82,15 +122,13 @@ namespace TicTacToeAi
                                         Console.WriteLine("AI wins!");
                                     }
                                 }
-                                if (playerWin == false && aiWin == false)
+                                if (aiWin == false && playerWin == false)
                                 {
-                                    Console.WriteLine("The AI will now take it's turn.");
-                                    easyAI.TakeTurn(gameBoard);
+                                    TakePlayerTurn(gameBoard);
                                     Console.WriteLine();
                                     gameBoard.DisplayBoard();
                                     Console.WriteLine();
-                                    //Same round win code
-                                    if (roundCount >= 2)
+                                    //round win code
                                     {
                                         if (gameBoard.CheckWin() == 1)
                                         {
@@ -104,7 +142,6 @@ namespace TicTacToeAi
                                         }
                                     }
                                 }
-                                roundCount++;
                             }
                         }
                         break;
