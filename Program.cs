@@ -57,7 +57,7 @@ namespace TicTacToeAi
                 switch (selectedDifficulty)
                 {
                     case "easy":
-                        EasyAI easyAI = new EasyAI();
+                        BasicAI easyAI = new BasicAI();
                         Console.WriteLine("Here is the game board.");
                         gameBoard.DisplayBoard();
                         if (goFirst == 1)
@@ -183,7 +183,7 @@ namespace TicTacToeAi
         }
         static void TakePlayerTurn(Board gameBoard)
         {
-            char selectedSpace = 'Z';
+            char selectedSpace = '0';
             bool selectedSpaceEmpty = false;
             while (selectedSpaceEmpty == false)
             {

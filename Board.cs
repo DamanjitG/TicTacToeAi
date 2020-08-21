@@ -6,18 +6,21 @@ namespace TicTacToeAi
 {
     class Board
     {
-        public char[,] grid = new char[3, 3];
+        public BoardSpace[,] grid;
         public Board()
         {
-            int increment = 65;
+            grid = new BoardSpace[3, 3];
+            int increment = 0;
             for (int i = 0; i < 3; i++)
             {
-                for (int j = 0; j < 3; j++)
+                for (int j = 0; j<3;j++)
                 {
-                    grid[i, j] = Convert.ToChar(increment);
                     increment++;
+                    grid[i, j] = new BoardSpace(increment);
+                    grid[i, j].SetSpaceValue(Convert.ToChar(increment + 64));
                 }
             }
+            
         }
         public void DisplayBoard()
         {
@@ -26,11 +29,11 @@ namespace TicTacToeAi
                 for (int j = 0; j < 3; j++)
                 {
                     if (j == 0) {
-                        Console.Write("| " + grid[i, j] + " | ");
+                        Console.Write("| " + grid[i, j].GetSpace() + " | ");
                     }
                     else
                     {
-                        Console.Write(grid[i, j] + " | ");
+                        Console.Write(grid[i, j].GetSpace() + " | ");
                     }
                 }
                 Console.WriteLine();
@@ -40,40 +43,40 @@ namespace TicTacToeAi
         {
             switch (space)
             {
-                case 'A':
-                    grid[0, 0] = token;
+                case '1':
+                    grid[0, 0].SetSpaceValue(token);
                     break;
 
-                case 'B':
-                    grid[0, 1] = token;
+                case '2':
+                    grid[0, 1].SetSpaceValue(token);
                     break;
 
-                case 'C':
-                    grid[0, 2] = token;
+                case '3':
+                    grid[0, 2].SetSpaceValue(token);
                     break;
 
-                case 'D':
-                    grid[1, 0] = token;
+                case '4':
+                    grid[1, 0].SetSpaceValue(token);
                     break;
 
-                case 'E':
-                    grid[1, 1] = token;
+                case '5':
+                    grid[1, 1].SetSpaceValue(token);
                     break;
 
-                case 'F':
-                    grid[1, 2] = token;
+                case '6':
+                    grid[1, 2].SetSpaceValue(token);
                     break;
 
-                case 'G':
-                    grid[2, 0] = token;
+                case '7':
+                    grid[2, 0].SetSpaceValue(token);
                     break;
 
-                case 'H':
-                    grid[2, 1] = token;
+                case '8':
+                    grid[2, 1].SetSpaceValue(token);
                     break;
 
-                case 'I':
-                    grid[2, 2] = token;
+                case '9':
+                    grid[2, 2].SetSpaceValue(token);
                     break;
 
             }
@@ -82,64 +85,64 @@ namespace TicTacToeAi
         {
             switch (space)
             {
-                case 'A':
-                    if (grid[0, 0] == 'X' || grid[0, 0] == 'O')
+                case '1':
+                    if (grid[0, 0].GetSpace() == 'X' || grid[0, 0].GetSpace() == 'O')
                     {
                         return false;
                     }
                     else { return true; }
 
-                case 'B':
-                    if (grid[0, 1] == 'X' || grid[0, 0] == 'O')
+                case '2':
+                    if (grid[0, 1].GetSpace() == 'X' || grid[0, 1].GetSpace() == 'O')
                     {
                         return false;
                     }
                     else { return true; }
 
-                case 'C':
-                    if (grid[0, 2] == 'X' || grid[0, 0] == 'O')
+                case '3':
+                    if (grid[0, 2].GetSpace() == 'X' || grid[0, 2].GetSpace() == 'O')
                     {
                         return false;
                     }
                     else { return true; }
 
-                case 'D':
-                    if (grid[1, 0] == 'X' || grid[0, 0] == 'O')
+                case '4':
+                    if (grid[1, 0].GetSpace() == 'X' || grid[1, 0].GetSpace() == 'O')
                     {
                         return false;
                     }
                     else { return true; }
 
-                case 'E':
-                    if (grid[1, 1] == 'X' || grid[0, 0] == 'O')
+                case '5':
+                    if (grid[1, 1].GetSpace() == 'X' || grid[1,1].GetSpace() == 'O')
                     {
                         return false;
                     }
                     else { return true; }
 
-                case 'F':
-                    if (grid[1, 2] == 'X' || grid[0, 0] == 'O')
+                case '6':
+                    if (grid[1, 2].GetSpace() == 'X' || grid[1,2].GetSpace() == 'O')
                     {
                         return false;
                     }
                     else { return true; }
 
-                case 'G':
-                    if (grid[2, 0] == 'X' || grid[0, 0] == 'O')
+                case '7':
+                    if (grid[2, 0].GetSpace() == 'X' || grid[2,0].GetSpace() == 'O')
                     {
                         return false;
                     }
                     else { return true; }
 
-                case 'H':
-                    if (grid[2, 1] == 'X' || grid[0, 0] == 'O')
+                case '8':
+                    if (grid[2, 1].GetSpace() == 'X' || grid[2,1].GetSpace() == 'O')
                     {
                         return false;
                     }
                     else { return true; }
 
-                case 'I':
-                    if (grid[2, 2] == 'X' || grid[0, 0] == 'O')
+                case '9':
+                    if (grid[2, 2].GetSpace() == 'X' || grid[2,2].GetSpace() == 'O')
                     {
                         return false;
                     }
@@ -156,92 +159,92 @@ namespace TicTacToeAi
             //player wins = 1, ai wins = 2, no one won = 0
 
             //Horizontal wins
-            if (grid[0, 0] == grid[0, 1] && grid[0, 0] == grid[0, 2])
+            if (grid[0, 0].GetSpace() == grid[0, 1].GetSpace() && grid[0, 0].GetSpace() == grid[0, 2].GetSpace())
             {
-                if (grid[0, 0] == 'X')
+                if (grid[0, 0].GetSpace() == 'X')
                 {
                     return 1;
                 }
-                else if (grid[0, 0] == 'O')
+                else if (grid[0, 0].GetSpace() == 'O')
                 {
                     return 2;
                 }
             }
-            if (grid[1, 0] == grid[1, 1] && grid[1, 0] == grid[1, 2])
+            if (grid[1, 0].GetSpace() == grid[1, 1].GetSpace() && grid[1, 0].GetSpace() == grid[1, 2].GetSpace())
             {
-                if (grid[1, 0] == 'X')
+                if (grid[1, 0].GetSpace() == 'X')
                 {
                     return 1;
                 }
-                else if (grid[1, 0] == 'O')
+                else if (grid[1, 0].GetSpace() == 'O')
                 {
                     return 2;
                 }
             }
-            if (grid[2, 0] == grid[2, 1] && grid[2, 0] == grid[2, 2])
+            if (grid[2, 0].GetSpace() == grid[2, 1].GetSpace() && grid[2, 0].GetSpace() == grid[2, 2].GetSpace())
             {
-                if (grid[2, 0] == 'X')
+                if (grid[2, 0].GetSpace() == 'X')
                 {
                     return 1;
                 }
-                else if (grid[2, 0] == 'O')
+                else if (grid[2, 0].GetSpace() == 'O')
                 {
                     return 2;
                 }
             }
             //Vertical column wins
-            if (grid[0, 0] == grid[1, 0] && grid[0, 0] == grid[2, 0])
+            if (grid[0, 0].GetSpace() == grid[1, 0].GetSpace() && grid[0, 0].GetSpace() == grid[2, 0].GetSpace())
             {
-                if (grid[0, 0] == 'X')
+                if (grid[0, 0].GetSpace() == 'X')
                 {
                     return 1;
                 }
-                else if (grid[0, 0] == 'O')
+                else if (grid[0, 0].GetSpace() == 'O')
                 {
                     return 2;
                 }
             }
-            if (grid[0, 1] == grid[1, 1] && grid[0, 1] == grid[2, 1])
+            if (grid[0, 1].GetSpace() == grid[1, 1].GetSpace() && grid[0, 1].GetSpace() == grid[2, 1].GetSpace())
             {
-                if (grid[0, 1] == 'X')
+                if (grid[0, 1].GetSpace() == 'X')
                 {
                     return 1;
                 }
-                else if (grid[0, 1] == 'O')
+                else if (grid[0, 1].GetSpace() == 'O')
                 {
                     return 2;
                 }
             }
-            if (grid[0, 2] == grid[1, 2] && grid[0, 2] == grid[2, 2])
+            if (grid[0, 2].GetSpace() == grid[1, 2].GetSpace() && grid[0, 2].GetSpace() == grid[2, 2].GetSpace())
             {
-                if (grid[0, 2] == 'X')
+                if (grid[0, 2].GetSpace() == 'X')
                 {
                     return 1;
                 }
-                else if (grid[0, 2] == 'O')
+                else if (grid[0, 2].GetSpace() == 'O')
                 {
                     return 2;
                 }
             }
             //Diagonal wins
-            if (grid[0, 0] == grid[1, 1] && grid[0, 0] == grid[2, 2])
+            if (grid[0, 0].GetSpace() == grid[1, 1].GetSpace() && grid[0, 0].GetSpace() == grid[2, 2].GetSpace())
             {
-                if (grid[0, 0] == 'X')
+                if (grid[0, 0].GetSpace() == 'X')
                 {
                     return 1;
                 }
-                else if (grid[0, 0] == 'O')
+                else if (grid[0, 0].GetSpace() == 'O')
                 {
                     return 2;
                 }
             }
-            if (grid[0, 2] == grid[1, 1] && grid[0, 2] == grid[2, 0])
+            if (grid[0, 2].GetSpace() == grid[1, 1].GetSpace() && grid[0, 2].GetSpace() == grid[2, 0].GetSpace())
             {
-                if (grid[0, 2] == 'X')
+                if (grid[0, 2].GetSpace() == 'X')
                 {
                     return 1;
                 }
-                else if (grid[0, 2] == 'O')
+                else if (grid[0, 2].GetSpace() == 'O')
                 {
                     return 2;
                 }
@@ -257,7 +260,7 @@ namespace TicTacToeAi
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    if (grid[i, j] == 'X' || grid[i,j] == 'O')
+                    if (grid[i, j].GetSpace() == 'X' || grid[i,j].GetSpace() == 'O')
                     {
                         increment++;
                     }
