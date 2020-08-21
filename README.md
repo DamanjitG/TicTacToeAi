@@ -4,7 +4,7 @@ Created in C#.
 
 A Player vs AI Tic Tac Toe game, with multiple difficulties.
 
-- *Easy (In progress):* The AI randomly places their tokens in any unoccupied spot.
+- *Easy:* The AI randomly places their tokens in any unoccupied spot.
 
 - *Medium (In progress):* The AI behaves like Easy difficulty, except it will attempt to block winning moves.
 
